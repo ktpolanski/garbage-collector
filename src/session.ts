@@ -212,4 +212,15 @@ export function printGarboSession(): void {
 
   message("This run of garbo", meat, items);
   message("So far today", totalMeat, totalItems);
+  Array.from(sessionSinceStart().items.entries()).forEach(([item, quantity]) => {
+    const value = garboValue(item) * quantity;
+    if (value > 1000000) {
+      print(
+        `We got ${value} meat in value from getting ${quantity} ${
+          quantity > 1 ? item.plural : item.name
+        }.`,
+        HIGHLIGHT
+      );
+    }
+  });
 }
